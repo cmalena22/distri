@@ -35,20 +35,20 @@ services:
     networks:
       - datalogger_net
 
-  apache-proxy:
-      image: nginx
-      container_name: reverse-proxy-demo
-      depends_on:
-      - srvwildfly    
-      - srvdb  
-      volumes:
-        - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
-      ports:
-          - "80:80"
-      networks:
+  reverse-proxy:
+    image: nginx
+    container_name: reverse-proxy-demo
+    depends_on:
+     - srvwildfly    
+     - srvdb  
+    volumes:
+       - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+         - "80:80"
+    networks:
       - datalogger_net
       
-      restart: always
+    restart: always
       
       
 volumes:
